@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DripBar AI</title>
+<style>
+body{background:#0b0d10;color:white;font-family:Arial;display:flex;justify-content:center;align-items:center;height:100vh;margin:0}
+#container{width:900px;text-align:center}
+button{padding:12px 24px;font-size:18px;font-weight:bold;border-radius:8px;border:none;cursor:pointer}
+#startBtn{background:#00c48c}
+#stopBtn{background:#ff4f4f;margin-left:15px}
+#debug{position:fixed;right:10px;bottom:10px;background:#111;border:1px solid #444;padding:10px;font-size:12px;width:320px;height:180px;overflow:auto}
+video{width:360px;border-radius:20px}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+  <h1>THE DRIPBAR AI</h1>
+  <video id="avatar" autoplay loop muted></video><br><br>
+
+  <button id="startBtn">START</button>
+  <button id="stopBtn">STOP</button>
+</div>
+
+<div id="debug"></div>
+
+<script src="client.js"></script>
+</body>
+</html>
