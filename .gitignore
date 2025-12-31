@@ -18,3 +18,5 @@ tmp/
 *.tgz
 package-lock.json
 pnpm-lock.yaml
+.env.*
+backups/
