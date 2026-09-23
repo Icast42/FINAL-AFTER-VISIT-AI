@@ -229,35 +229,52 @@
   }
 
   @media print {
-    @page { size: letter; margin: 0.4in; }
-    body { background: #fff; padding: 0; font-size: 13px; }
-    .wrap { gap: 10px; }
-    .step, .match, .summary { break-inside: avoid; }
-    .fix { break-inside: avoid; }
+    @page { size: letter; margin: 0.35in; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .steps, .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .fix dl { grid-template-columns: minmax(0, 12em) minmax(0, 1fr); gap: 4px 12px; }
-    .fix dd { margin-bottom: 0; }
-    h1 { font-size: 36px; }
-    h2 { font-size: 21px; }
-    .step, .match, .fix { padding: 12px; gap: 8px; }
-    .step p { font-size: 14px; }
-    .scr { min-height: 0; }
-    .tile { min-height: 60px; }
-    .popup { padding: 10px; }
-    .lede { font-size: 15px; }
-    .note { font-size: 13px; }
-    .popup .opt { padding: 4px 8px; font-size: 14px; }
-    .match { break-before: page; padding: 18px; gap: 12px; }
-    .match h2, .fix h2 { font-size: 28px; }
-    .match .note, .fix { font-size: 16px; }
-    th { font-size: 14px; }
-    th, td { padding: 10px 10px; }
-    table { font-size: 17px; }
-    td b { font-size: 20px; }
-    .fix { padding: 18px; gap: 12px; }
-    .fix dl { grid-template-columns: minmax(0, 13em) minmax(0, 1fr); gap: 12px 16px; }
-    footer { font-size: 14px; }
+    body { background: #fff; padding: 0; font-size: 12px; line-height: 1.35; }
+    .wrap { max-width: none; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    header, .summary, .steps, .pair, footer { grid-column: 1 / -1; }
+    header { gap: 2px; }
+    h1 { font-size: 30px; }
+    .lede { font-size: 13px; max-width: none; }
+    .summary { padding: 6px 8px; font-size: 14px; gap: 6px; }
+    .summary .chip { padding: 4px 8px; }
+    .steps, .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-items: start; }
+    .step, .match, .fix { padding: 10px 12px; gap: 6px; break-inside: avoid; }
+    h2, .match h2, .fix h2 { font-size: 18px; }
+    .num { width: 24px; height: 24px; font-size: 15px; transform: translateY(3px); }
+    .step-head { gap: 8px; }
+    .step p { font-size: 12.5px; }
+    .note, .match .note { font-size: 11.5px; }
+    .tablet { padding: 6px; border-radius: 10px; }
+    .scr { min-height: 0; grid-template-columns: 36px 1fr; }
+    .rail { padding: 20px 4px 6px; gap: 3px; }
+    .rail span { height: 24px; }
+    .rail svg { width: 16px; height: 16px; }
+    .tile { min-height: 50px; font-size: 11px; }
+    .popup { padding: 8px; }
+    .popup .ttl { padding-bottom: 2px; }
+    .popup .opt { padding: 2px 8px; font-size: 13.5px; }
+    .popup .opt small { font-size: 10.5px; }
+    .popup .close { margin-top: 3px; padding: 3px; font-size: 12px; }
+    table { font-size: 12.5px; }
+    th { font-size: 10.5px; }
+    th, td { padding: 3.5px 6px; }
+    td b { font-size: 14px; }
+    .fix { font-size: 12.5px; }
+    .fix dl { grid-template-columns: minmax(0, 1fr); gap: 0; }
+    .fix dt { margin-top: 5px; }
+    .fix dt:first-child { margin-top: 0; }
+    .fix dd { margin: 0; }
+    footer { font-size: 11px; }
+    body { margin: 0; }
+    .rail { padding-top: 16px; gap: 2px; }
+    .rail span { height: 20px; }
+    .tile { min-height: 44px; }
+    .match .note { display: none; }
+    .match, .fix { align-content: start; }
+    .fix { line-height: 1.25; }
+    .fix dt { margin-top: 4px; }
   }
 </style>
 
@@ -374,7 +391,7 @@
       <dt>Roku is stuck in an app</dt>
       <dd>All One Main Screen → <b>Home Screen - All Roku</b>, then pick your Roku again.</dd>
       <dt>Picture works, no sound</dt>
-      <dd>Audio Sources → pick the <b>Press Box</b> that matches what's on the screen (see table above).</dd>
+      <dd>Audio Sources → pick the <b>Press Box</b> that matches what's on the screen (see the matching table).</dd>
       <dt>Wrong sound playing</dt>
       <dd>Audio Sources → pick the right one. The new choice replaces the old one.</dd>
       <dt>Lost in the menus</dt>
