@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Control4 TV Cheat Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+  :root {
+    --ground: #eef1f3;
+    --paper: #ffffff;
+    --ink: #16212b;
+    --muted: #5a6873;
+    --line: #d5dce1;
+    --accent: #0b7d73;
+    --accent-soft: #d9efec;
+    --screen: #1f2a36;
+    --screen-2: #2d3a48;
+    --screen-tile: #3a2f33;
+    --screen-text: #e8edf1;
+    --warn: #a35b00;
+    --warn-soft: #fbeedc;
+    --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+    --body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground: #10171d;
+      --paper: #18222b;
+      --ink: #e6ecf0;
+      --muted: #9aa9b4;
+      --line: #2b3844;
+      --accent: #3cc2b3;
+      --accent-soft: #163a37;
+      --screen: #0b1117;
+      --screen-2: #1b2632;
+      --screen-tile: #33282c;
+      --screen-text: #e8edf1;
+      --warn: #f0a849;
+      --warn-soft: #3a2a14;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground: #10171d;
+    --paper: #18222b;
+    --ink: #e6ecf0;
+    --muted: #9aa9b4;
+    --line: #2b3844;
+    --accent: #3cc2b3;
+    --accent-soft: #163a37;
+    --screen: #0b1117;
+    --screen-2: #1b2632;
+    --screen-tile: #33282c;
+    --screen-text: #e8edf1;
+    --warn: #f0a849;
+    --warn-soft: #3a2a14;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font: 400 16px/1.5 var(--body);
+    padding-inline: 16px;
+    padding-block: 24px 40px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 20px; }
+
+  header { display: grid; gap: 6px; }
+  .eyebrow {
+    font: 600 13px/1 var(--display);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font: 700 clamp(34px, 6vw, 52px)/1 var(--display);
+    margin: 0;
+    text-wrap: balance;
+    letter-spacing: .01em;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 62ch; font-size: 17px; }
+
+  .summary {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font: 600 17px/1.2 var(--display);
+    letter-spacing: .02em;
+  }
+  .summary .chip {
+    background: var(--accent-soft); color: var(--ink);
+    padding: 6px 10px; border-radius: 6px; white-space: nowrap;
+  }
+  .summary .arrow { color: var(--accent); font-weight: 700; }
+
+  .steps { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .step {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    display: grid; gap: 12px; align-content: start;
+  }
+  .step-head { display: flex; gap: 12px; align-items: baseline; }
+  .num {
+    flex: none;
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--accent); color: var(--paper);
+    font: 700 20px/1 var(--display);
+    transform: translateY(6px);
+  }
+  h2 { font: 700 26px/1.1 var(--display); margin: 0; letter-spacing: .01em; text-wrap: balance; }
+  .step p { margin: 0; }
+  .step ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+  .tap {
+    font: 600 .95em/1 var(--display);
+    letter-spacing: .03em;
+    background: var(--screen); color: var(--screen-text);
+    padding: 3px 8px; border-radius: 5px; white-space: nowrap;
+  }
+  .note { color: var(--muted); font-size: 15px; }
+
+  /* ---- tablet mockups ---- */
+  .tablet {
+    background: #0a0d10;
+    border-radius: 14px;
+    padding: 10px;
+    max-width: 100%;
+  }
+  .scr {
+    background: linear-gradient(160deg, var(--screen-2), var(--screen));
+    border-radius: 6px;
+    color: var(--screen-text);
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    min-height: 170px;
+    font-family: var(--body);
+    position: relative;
+    overflow: hidden;
+  }
+  .rail {
+    display: grid; align-content: start; gap: 6px;
+    padding: 26px 6px 8px;
+  }
+  .rail span {
+    display: grid; place-items: center;
+    height: 30px; border-radius: 6px; color: #b9c4cc;
+  }
+  .rail svg { width: 20px; height: 20px; }
+  .rail .hit { background: var(--accent); color: #fff; box-shadow: 0 0 0 3px rgba(60,194,179,.35); }
+  .main { padding: 8px 10px 10px; display: grid; gap: 8px; align-content: start; }
+  .roomname { font: 600 14px/1 var(--display); letter-spacing: .04em; }
+  .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  .tile {
+    background: var(--screen-tile);
+    border-radius: 7px;
+    min-height: 74px;
+    padding: 7px;
+    font: 600 12px/1.15 var(--display);
+    letter-spacing: .02em;
+    display: grid; align-content: start; gap: 6px;
+  }
+  .tile i { display: block; width: 16px; height: 13px; border: 1.5px solid currentColor; border-radius: 2px; }
+  .tile.hit { outline: 3px solid var(--accent); outline-offset: 1px; }
+
+  .popup {
+    background: var(--screen-tile);
+    border-radius: 10px;
+    padding: 12px;
+    display: grid; gap: 2px;
+    color: var(--screen-text);
+  }
+  .popup .ttl { font: 600 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: #b9c4cc; text-align: center; padding-bottom: 6px; }
+  .popup .opt {
+    font: 600 16px/1.2 var(--display); letter-spacing: .02em;
+    padding: 7px 10px; border-radius: 6px;
+    display: flex; justify-content: space-between; gap: 8px; align-items: baseline;
+  }
+  .popup .opt small { font: 400 12px/1.2 var(--body); color: #b9c4cc; text-align: right; }
+  .popup .opt.util { color: #f3c98b; }
+  .popup .close {
+    margin-top: 6px;
+    border: 1.5px solid #cfd8de; border-radius: 999px;
+    text-align: center; padding: 6px;
+    font: 600 14px/1 var(--display); letter-spacing: .04em;
+  }
+
+  .pair { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .match {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px; display: grid; gap: 12px;
+  }
+  .match h2 { font-size: 24px; }
+  .tbl-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 16px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  td b { font-family: var(--display); font-size: 17px; letter-spacing: .02em; }
+
+  .fix {
+    background: var(--warn-soft);
+    border-radius: 12px;
+    padding: 18px;
+    display: grid; gap: 10px;
+  }
+  .fix h2 { font-size: 24px; color: var(--warn); }
+  .fix dl { margin: 0; display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 8px 16px; }
+  .fix dt { font-weight: 700; }
+  .fix dd { margin: 0; }
+
+  footer { color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 760px) {
+    .steps, .pair { grid-template-columns: minmax(0, 1fr); }
+    .fix dl { grid-template-columns: minmax(0, 1fr); }
+    .fix dd { margin-bottom: 6px; }
+  }
+  @media (max-width: 420px) {
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media print {
+    @page { size: letter; margin: 0.4in; }
+    body { background: #fff; padding: 0; font-size: 13px; }
+    .wrap { gap: 10px; }
+    .step, .match, .summary { break-inside: avoid; }
+    .fix { break-inside: avoid; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .steps, .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .fix dl { grid-template-columns: minmax(0, 12em) minmax(0, 1fr); gap: 4px 12px; }
+    .fix dd { margin-bottom: 0; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 21px; }
+    .match h2, .fix h2 { font-size: 20px; }
+    .step, .match, .fix { padding: 12px; gap: 8px; }
+    .popup .opt { padding: 4px 8px; font-size: 14px; }
+    th, td { padding: 4px 8px; }
+    td b { font-size: 14px; }
+    table { font-size: 13px; }
+  }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Team cheat sheet · TV 1 room tablet</div>
+    <h1>Control4 in 4 taps</h1>
+    <p class="lede">Picture on the screens, sound on the surround system. That's all you need. Follow the steps in order.</p>
+  </header>
+
+  <div class="summary" aria-label="Quick path">
+    <span class="chip">Log in</span><span class="arrow">→</span>
+    <span class="chip">2nd icon on left</span><span class="arrow">→</span>
+    <span class="chip">All One Main Screen</span><span class="arrow">→</span>
+    <span class="chip">Audio Sources</span><span class="arrow">→</span>
+    <span class="chip">Close</span>
+  </div>
+
+  <section class="steps">
+    <!-- Step 1 -->
+    <article class="step">
+      <div class="step-head"><span class="num">1</span><h2>Wake the tablet &amp; log in</h2></div>
+      <p>Turn the tablet on, unlock it, and open the <b>Control4</b> app. Log in if it asks.</p>
+      <p class="note">Hold the tablet sideways (landscape). The menu icons run down the left edge.</p>
+    </article>
+
+    <!-- Step 2 -->
+    <article class="step">
+      <div class="step-head"><span class="num">2</span><h2>Tap the 2nd icon on the left</h2></div>
+      <p>That's the room/home button. It opens <b>TV 1</b> with four big tiles.</p>
+      <div class="tablet" aria-hidden="true">
+        <div class="scr">
+          <div class="rail">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h11l5 7-5 7H4z"/></svg></span>
+            <span class="hit"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h11l5 7-5 7H4z"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7 16l4-4 3 3 3-3"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h11l5 7-5 7H4z"/><path d="M7 9h6M7 12h6M7 15h6"/></svg></span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></span>
+          </div>
+          <div class="main">
+            <div class="roomname">TV 1 ›</div>
+            <div class="tiles">
+              <div class="tile"><i></i>Watch</div>
+              <div class="tile"><i></i>Video Wall</div>
+              <div class="tile"><i></i>All One Main Screen</div>
+              <div class="tile"><i></i>Audio Sources</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="note">The highlighted icon (2nd from the top of the left bar) is the one to tap.</p>
+    </article>
+  </section>
+
+  <section class="pair">
+    <!-- Step 3 -->
+    <article class="step">
+      <div class="step-head"><span class="num">3</span><h2>Pick what's on the screen</h2></div>
+      <p>Tap <span class="tap">All One Main Screen</span>, then tap the device you want to show.</p>
+      <div class="popup" aria-label="All One Main Screen menu">
+        <div class="ttl">All One Main Screen</div>
+        <div class="opt">Roku 1</div>
+        <div class="opt">Roku 2</div>
+        <div class="opt">PS5 - 1</div>
+        <div class="opt">PS5 - 2</div>
+        <div class="opt util">Home Screen - All Roku <small>Sends every Roku back to its home screen</small></div>
+        <div class="opt util">Power Toggle Wall <small>Turns the wall TVs on / off</small></div>
+        <div class="close">Close</div>
+      </div>
+    </article>
+
+    <!-- Step 4 -->
+    <article class="step">
+      <div class="step-head"><span class="num">4</span><h2>Pick what's on the surround sound</h2></div>
+      <p>Tap <span class="tap">Audio Sources</span>, then tap the sound you want, and tap <span class="tap">Close</span>.</p>
+      <div class="popup" aria-label="Audio Sources menu">
+        <div class="ttl">Audio Sources</div>
+        <div class="opt">Sonos All <small>Background music</small></div>
+        <div class="opt">Roku 1 Press Box</div>
+        <div class="opt">Roku 2 Press Box</div>
+        <div class="opt">PS5 - 1 Press Box</div>
+        <div class="opt">PS5 - 2 Press Box</div>
+        <div class="opt">Microphone</div>
+        <div class="close">Close</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="match">
+    <h2>Match the sound to the picture</h2>
+    <p class="note" style="margin:0">Whatever you put on the screen in step 3, pick the audio with the same name in step 4.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>On the screen (step 3)</th><th>Audio source (step 4)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Roku 1</b></td><td><b>Roku 1 Press Box</b></td></tr>
+          <tr><td><b>Roku 2</b></td><td><b>Roku 2 Press Box</b></td></tr>
+          <tr><td><b>PS5 - 1</b></td><td><b>PS5 - 1 Press Box</b></td></tr>
+          <tr><td><b>PS5 - 2</b></td><td><b>PS5 - 2 Press Box</b></td></tr>
+          <tr><td>Just want music</td><td><b>Sonos All</b></td></tr>
+          <tr><td>Announcements / speaking</td><td><b>Microphone</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="fix">
+    <h2>If something looks wrong</h2>
+    <dl>
+      <dt>Screens are black</dt>
+      <dd>All One Main Screen → <b>Power Toggle Wall</b>. Give the TVs a few seconds.</dd>
+      <dt>Roku is stuck in an app</dt>
+      <dd>All One Main Screen → <b>Home Screen - All Roku</b>, then pick your Roku again.</dd>
+      <dt>Picture works, no sound</dt>
+      <dd>Audio Sources → pick the <b>Press Box</b> that matches what's on the screen (see table above).</dd>
+      <dt>Wrong sound playing</dt>
+      <dd>Audio Sources → pick the right one. The new choice replaces the old one.</dd>
+      <dt>Lost in the menus</dt>
+      <dd>Tap <b>Close</b>, then tap the <b>2nd icon on the left</b> to get back to TV 1.</dd>
+    </dl>
+  </section>
+
+  <footer><b>Watch</b> and <b>Video Wall</b> aren't needed for everyday use. Still stuck? Ask a manager.</footer>
+</div>
+</body>
+</html>
